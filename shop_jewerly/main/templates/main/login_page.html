@@ -1,0 +1,19 @@
+{% block title %}LOgin page here!{% endblock %}
+
+{% block content %}
+<form action="/about">
+<input type = "button">
+<input type = "checkbox">
+<textarea></textarea>
+</form>
+
+<div>
+    <form method = "post">
+        {%if error%}<b>{{error}} </b>{%endif%}
+        {% csrf_token %}
+        {{form}}
+        <br />
+        <button type="Submit">Login</button>
+    </form>
+</div>
+{% endblock %}

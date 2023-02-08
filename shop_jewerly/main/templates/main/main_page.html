@@ -1,0 +1,35 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}My shop{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<div id="header">
+   <h1><a href="/" class="logo">My shop</a></h1>
+</div>
+        <a href="/"><b>Home</b></a>
+        <a href="/catalog"><b>Catalog</b></a>
+        <a href ="/login">LOGin</a>
+        <a href ="/logout">LOGout</a>
+        <a href="/sign_up">SIGNUp</a>
+<div id="subheader">
+    <div class="cart">
+        {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+        <a href="{% url 'cart:cart_detail' %}">
+            Your cart
+        </a>
+        {% else %}
+        Your cart is empty.
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
