@@ -1,6 +1,7 @@
 from decimal import Decimal
 from main.models import Product
 from django.conf import settings
+from django.shortcuts import get_object_or_404
 
 
 class Cart(object):
@@ -24,7 +25,6 @@ class Cart(object):
             self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}
 
         if update:
-        #     self.cart[product_id]['count'] += count_of_prod
             self.cart[product_id]['quantity'] = quantity
         else:
             self.cart[product_id]['quantity'] += quantity
@@ -39,10 +39,6 @@ class Cart(object):
             self.save_changes()
 
     def get_price(self):
-        # sum = 0
-        # for product in self.cart.values():
-        #     sum += Decimal(product['price'])*product['count']
-        # return sum
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
 
     def clear_cart(self):
@@ -52,12 +48,14 @@ class Cart(object):
 
     def __iter__(self):
         product_ids = self.cart.keys()
+
         # получение объектов product и добавление их в корзину
         products = Product.objects.filter(id__in=product_ids)
         cart = self.cart.copy()
 
         for product in products:
             cart[str(product.id)]['product'] = product
+           # product_id = product.id
 
         for item in cart.values():
             item['price'] = Decimal(item['price'])

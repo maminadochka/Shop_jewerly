@@ -54,3 +54,6 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.id, self.slug])
+
+    def update_stock(self, product, count):
+        product.stock -= count

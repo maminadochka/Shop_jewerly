@@ -3,21 +3,10 @@ from django.views.decorators.http import require_POST
 from .forms import CartForm
 from .cart import Cart
 from main.models import Product
+from django.contrib import messages
 
 
 # Create your views here.
-
-# def add_product_to_cart(request, product_id):
-#     cart = Cart(request)
-#     product = get_object_or_404(Product, id=product_id)
-#     if request.method == "POST":
-#         form = CartForm(request.POST)
-#         if form.is_valid():
-#             data = form.cleaned_data
-#             cart.add_to_cart(product=product,
-#                              count_of_prod=data['count'],
-#                              update_count=data['update'])
-#     return redirect('cart:cart')
 
 @require_POST
 def add_product_to_cart(request, product_id):
@@ -26,9 +15,14 @@ def add_product_to_cart(request, product_id):
     form = CartForm(request.POST)
     if form.is_valid():
         data = form.cleaned_data
-        cart.add_to_cart(product=product,
-                         quantity=data['quantity'],
-                         update=data['update'])
+        available_count = data['quantity']
+        if available_count <= product.stock:
+            cart.add_to_cart(product=product,
+                             quantity=data['quantity'],
+                             update=data['update'])
+            return redirect('cart:cart_detail')
+        else:
+            messages.error(request, 'This jewelry is not available in this quantity')
     return redirect('cart:cart_detail')
 
 

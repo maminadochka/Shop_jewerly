@@ -4,6 +4,17 @@
     Your shopping cart
 {% endblock %}
 {% block content %}
+
+{% if messages %}
+{% for message in messages %}
+    <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+
+{% else %}
+
     <h1>Your shopping cart</h1>
     <table class="cart">
         <thead>
@@ -54,8 +65,10 @@
             <td class="num">${{ cart.get_price }}</td>
         </tr>
         </tbody>
-    </table>
-    <p class="text-right">
-       <a href="{% url 'orders:order_create' %}" class="button"> Checkout</a>
-    </p>
+
+            </table>
+            <p class="text-right">
+               <a href="{% url 'orders:order_create' %}" class="button"> Checkout</a>
+            </p>
+        {% endif %}
 {% endblock %}
