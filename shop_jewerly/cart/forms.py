@@ -9,5 +9,3 @@ class CartForm(forms.Form):
     update = forms.BooleanField(required=False,
                                 initial=False,
                                 widget=forms.HiddenInput)
-
-    #TODO: add arguments разобраться!

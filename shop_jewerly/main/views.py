@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User as DjangoUser
+from .forms import LoginForm, UserForm
 from django.contrib.auth import logout, login
 from django.contrib.auth import authenticate
-from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, UserForm
 from .models import Category, Product
 from cart.forms import CartForm
+
 
 # Create your views here.
 
@@ -49,6 +51,16 @@ def sign_up(request):
     else:
         form = UserForm()
     return render(request, 'main/sign_up.html', {'form': form})
+
+
+@login_required()
+def profile(request):
+    user = request.user
+    if user.is_authenticated:
+        user_name = user
+        email = request.user.email
+    return render(request, 'main/profile.html',
+                  {'user_name': user_name, 'email': email, })
 
 
 def catalog_page(request, category_slug=None): #products list

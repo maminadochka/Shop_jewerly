@@ -29,7 +29,6 @@ def order_create(request):
                                          product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'])
-            # очистка корзины
             cart.clear_cart()
             new_order.delay(order.id)
             return render(request, 'orders/created_order.html',

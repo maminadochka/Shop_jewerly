@@ -1,33 +1,22 @@
 {% extends "main/main_page.html" %}
 {% load static %}
-{% block title %}
-    Your shopping cart
-{% endblock %}
+{% block title %}Shopping cart{% endblock %}
+
 {% block content %}
-
-{% if messages %}
-{% for message in messages %}
-    <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
-    {{ message }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-{% endfor %}
-
-{% else %}
-
+<div class="container">
     <h1>Your shopping cart</h1>
     <table class="cart">
-        <thead>
-        <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Change count</th>
-            <th>Remove</th>
-            <th>Count</th>
-            <th>Unit price</th>
-            <th>Price</th>
-        </tr>
-        </thead>
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Image</th>-->
+<!--            <th>Product</th>-->
+<!--            <th>Change count</th>-->
+<!--            <th>Remove</th>-->
+<!--            <th>Count</th>-->
+<!--            <th>Unit price</th>-->
+<!--            <th>Price</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
 
         <tbody>
         {% for item in cart %}
@@ -55,20 +44,23 @@
                     <td><a href="{% url 'cart:remove_from_cart' product.id%}">Remove</a></td>
                     <td>{{ item.quantity }}</td>
                     <td class="num">${{ item.price }}</td>
-                    <td class="num">${{ item.total_price }}</td>
+<!--                    <td class="num">${{ item.total_price }}</td>-->
                 </tr>
             {% endwith %}
         {% endfor %}
+
         <tr class="total">
             <td>Total</td>
             <td colspan="4"></td>
             <td class="num">${{ cart.get_price }}</td>
         </tr>
         </tbody>
-
-            </table>
-            <p class="text-right">
-               <a href="{% url 'orders:order_create' %}" class="button"> Checkout</a>
-            </p>
-        {% endif %}
+    </table>
+    <hr>
+    <p class="text-right" >
+        <big><big>
+       <a href="{% url 'orders:order_create' %}"> Checkout</a>
+        </big></big>
+    </p>
+</div>
 {% endblock %}

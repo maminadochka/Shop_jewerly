@@ -22,7 +22,7 @@ def add_product_to_cart(request, product_id):
                              update=data['update'])
             return redirect('cart:cart_detail')
         else:
-            messages.error(request, 'This jewelry is not available in this quantity')
+            messages.error(request, 'Sorry, this jewelry is not available in this quantity.')
     return redirect('cart:cart_detail')
 
 

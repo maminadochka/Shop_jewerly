@@ -5,14 +5,14 @@ from django.urls import reverse
 # Create your models here.
 
 
-class User(models.Model):
-    user_name = models.CharField(max_length=100)
-    email = models.CharField(max_length=300, unique=True)
-    password = models.CharField(max_length=300)
-    is_admin = models.BooleanField(default=False)
-
-    def __repr__(self):
-        return f'{self.user_name}'
+# class User(models.Model):
+#     user_name = models.CharField(max_length=100)
+#     email = models.CharField(max_length=300, unique=True)
+#     password = models.CharField(max_length=300)
+#     is_admin = models.BooleanField(default=False)
+#
+#     def __repr__(self):
+#         return f'{self.user_name}'
 
 
 class Category(models.Model):

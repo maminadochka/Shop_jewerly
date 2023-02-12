@@ -1,24 +1,20 @@
-{% extends "main/main_page.html" %}
+{% extends "main/index_page.html" %}
 {% load static %}
+
 {% block title %}
     {% if category %}{{ category.name }}{% else %}Products{% endif %}
-{% endblock %}
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<a href="/home"><b>Home</b></a>
-<h1>
-     CAtalog
-</h1>
-</body>
+{% endblock title%}
+
 {% block content %}
+<div class="container">
+    <h2>Catalog</h2>
+    <h6>Best jewelry for you.</h6>
+
     <div id="sidebar">
         <h3>Categories</h3>
         <ul>
-            <li {% if not category %}class="selected"{% endif %}>
-                <a href="/catalog">All</a>
+            <li {% if not category %}class="selected"{% endif %} >
+                <a href="/catalog" >All</a>
             </li>
             {% for c in categories %}
                 <li {% if category.slug == c.slug %}class="selected"{% endif %}>
@@ -35,9 +31,47 @@
                 <a href="{{ product.get_absolute_url }}">
                     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_img.png' %}{% endif %}">
                 </a>
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
                 ${{ product.price }}
             </div>
         {% endfor %}
     </div>
-{% endblock %}
+
+
+
+<!--<section class="main-section paddind" id="Portfolio">-->
+<!--		<div class="container">-->
+<!--			<h2>Catalog</h2>-->
+<!--			<h6>Best jewelry for you.</h6>-->
+<!--            <h3 style="text-align: center;">Categories</h3>-->
+<!--			<div class="portfolioFilter">-->
+<!--				<ul class="Portfolio-nav wow fadeIn delay-02s">-->
+<!--					<li {% if not category %}class="selected"{% endif %} >-->
+<!--                        <a href="/catalog" >All</a>-->
+<!--                    </li>-->
+
+<!--                    {% for c in categories %}-->
+<!--                    <li {% if category.slug == c.slug %}class="selected"{% endif %}>-->
+<!--                        <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>-->
+<!--                    </li>-->
+<!--                    {% endfor %}-->
+<!--				</ul>-->
+<!--			</div>-->
+
+
+<!--            <div class="portfolioContainer wow fadeInUp delay-04s">-->
+<!--                <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>-->
+<!--                    {% for product in products %}-->
+<!--                    <div class=" Portfolio-box printdesign">-->
+<!--                        <a href="{{ product.get_absolute_url }}">-->
+<!--                                <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_img.png' %}{% endif %}">-->
+<!--                        </a>-->
+<!--                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>-->
+<!--                        ${{ product.price }}-->
+<!--                    {% endfor %}-->
+<!--                    </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--</section>-->
+</div>
+{% endblock content %}

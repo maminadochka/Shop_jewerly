@@ -1,13 +1,15 @@
-{% extends "main/main_page.html" %}
+{% extends "main/index_page.html" %}
 {% load static %}
 {% block title %}
     {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock %}
 {% block content %}
-    <div class="product-detail">
-        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+    <div class="container">
+        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
+             style="float: left;margin: 17px 17px 17px 17px;">
         <h1>{{ product.name }}</h1>
-        <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+        <hr>
+        <h3><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h3>
         <p class="price">${{ product.price }}</p>
             <form action="{% url 'cart:add_product_to_cart' product.id %}" method="post">
                 {{cart_product_form}}

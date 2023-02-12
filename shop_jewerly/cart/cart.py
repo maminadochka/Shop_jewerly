@@ -9,13 +9,12 @@ class Cart(object):
     def __init__(self, request):
         self.session = request.session
         cart = self.session.get(settings.CART_SESSION_ID)
-        # if no cart in the session
         if not cart:
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
     def save_changes(self):
-       # self.session[settings.CART_SESSION_ID] = self.cart
+        self.session[settings.CART_SESSION_ID] = self.cart
         self.session.modified = True
 
     def add_to_cart(self, product, quantity=1, update=False):
@@ -42,8 +41,9 @@ class Cart(object):
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
 
     def clear_cart(self):
-        del self.session[settings.CART_SESSION_ID]
-        #self.session.modified = True
+        #del self.session[settings.CART_SESSION_ID]
+        self.session[settings.CART_SESSION_ID] = {}
+        self.session.modified = True
         self.save_changes()
 
     def __iter__(self):

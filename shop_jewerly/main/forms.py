@@ -25,3 +25,13 @@ class UserForm(ModelForm):
             return _user.password
         else:
             raise ValidationError("Don't understand You")
+
+
+# class ProfileForm(ModelForm):
+#     username = CharField(label="Username")
+#     email = CharField(label="Email", widget=EmailInput())
+#
+#     class Meta:
+#         model = DjangoUser
+#         fields = ['username', 'email']
+

@@ -18,16 +18,16 @@
     </div>
     <form action="." method="post" class="order-form">
         {%if user and email%}
-        <p><label for="id_user">Name:</label>
-        <input type="text" name="user_name" id="id_user"  value={{user}}></p>
+            <p><label for="id_user">Name:</label>
+            <input type="text" name="user_name" id="id_user"  value={{user}}></p>
 
-        <p><label for="id_email">Email:</label>
-        <input type="email" name="email" id="id_email"  value={{email}}></p>
+            <p><label for="id_email">Email:</label>
+            <input type="email" name="email" id="id_email"  value={{email}}></p>
 
-        <p><label for="id_address">Address:</label>
-        <input type="text" name="address" id="id_address" required></p>
+            <p><label for="id_address">Address:</label>
+            <input type="text" name="address" id="id_address" required></p>
         {%else%}
-        {{ form.as_p }}
+            {{ form.as_p }}
         {%endif%}
 
         <p><input type="submit" value="Place order"></p>
