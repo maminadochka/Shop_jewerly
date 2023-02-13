@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block title %}
-    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+    {% if category %}{{ category.name }}{% else %}All{% endif %}
 {% endblock title%}
 
 {% block content %}
+<section class="main-section" id="service">
 <div class="container">
     <h2>Catalog</h2>
     <h6>Best jewelry for you.</h6>
-
     <div id="sidebar">
         <h3>Categories</h3>
         <ul>
@@ -25,19 +25,20 @@
     </div>
 
     <div id="main" class="product-list">
-        <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+        <h1>{% if category %}{{ category.name }}{% else %}All{% endif %}</h1>
         {% for product in products %}
-            <div class="item">
+            <div class="item" style="float:left; margin: 10px 10px 10px 10px;">
                 <a href="{{ product.get_absolute_url }}">
                     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_img.png' %}{% endif %}">
                 </a>
-                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
-                ${{ product.price }}
+                <div class="product-list">
+                    <a href="{{ product.get_absolute_url }}" class="product">{{ product.name }}</a>
+                    <br>
+                    <span class="price">${{ product.price }}</span>
+                </div>
             </div>
         {% endfor %}
     </div>
-
-
 
 <!--<section class="main-section paddind" id="Portfolio">-->
 <!--		<div class="container">-->
@@ -74,4 +75,5 @@
 <!--        </div>-->
 <!--</section>-->
 </div>
+</section>
 {% endblock content %}

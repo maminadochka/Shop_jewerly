@@ -6,6 +6,11 @@ class LoginForm(Form):
     username = CharField(label="Username")
     password = CharField(label="Password", widget=PasswordInput())
 
+
+    class Meta:
+        model = DjangoUser
+        fields = ['username', 'password']
+
     def clean(self):
         data = self.cleaned_data
         if 'username' not in data and 'password' not in data:

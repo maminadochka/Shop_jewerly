@@ -19,6 +19,7 @@
 	<link href="{% static 'css/responsive.css' %}" rel="stylesheet" type="text/css">
 	<link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet" type="text/css">
 	<link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'css/base.css' %}" rel="stylesheet">
 
     <script type="text/javascript" src="{% static 'js/jquery.1.8.3.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
@@ -49,8 +50,6 @@
 				<li><a href="/login">LogIn</a></li>
 				{% endif %}
 				<li>
-<!--				<li><div id="subheader">-->
-<!--					<div class="cart">-->
 		        {% with total_items=cart|length %}
         		{% if cart|length > 0 %}
         		<a href="{% url 'cart:cart_detail' %}">
@@ -60,8 +59,6 @@
 						Your cart is empty.
 						{% endif %}
 						{% endwith %}
-<!--					</div>-->
-<!--				</div>-->
 				</li>
 			</ul>
 			<a class="res-nav_click" href="#"><i class="fa fa-bars"></i></a>

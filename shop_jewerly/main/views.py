@@ -6,7 +6,7 @@ from django.contrib.auth import logout, login
 from django.contrib.auth import authenticate
 from .models import Category, Product
 from cart.forms import CartForm
-
+from django.conf import settings
 
 # Create your views here.
 
@@ -16,12 +16,19 @@ def main_page(request):
 
 
 def logout_page(request):
+    # your_data = request.session.get(settings.CART_SESSION_ID, None)
+    # current_expiry = request.session.get('_sesion_expiry')
     logout(request)
+    # if your_data:
+    #     request.session[settings.CART_SESSION_ID] = your_data
+    #     if current_expiry:
+    #         request.session['_sesion_expiry'] = current_expiry
     return redirect('home')
 
 
 def login_page(request):
     error = ''
+
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():

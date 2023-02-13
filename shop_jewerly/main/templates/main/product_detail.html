@@ -6,7 +6,7 @@
 {% block content %}
     <div class="container">
         <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
-             style="float: left;margin: 17px 17px 17px 17px;">
+             style="float: left;margin: 17px 17px 17px 7px;">
         <h1>{{ product.name }}</h1>
         <hr>
         <h3><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h3>

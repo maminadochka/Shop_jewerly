@@ -24,6 +24,7 @@ def order_create(request):
             for item in cart:
                 product = Product.objects.get(name=item['product'])
                 count = product.stock - item['quantity']
+                print(count)
                 Product.objects.filter(name=item['product']).update(stock=count)
                 OrderItem.objects.create(order=order,
                                          product=item['product'],

@@ -1,18 +1,9 @@
 from django.db import models
 from django.urls import reverse
+from rest_framework import serializers
 #from django.core.urlresolvers import reverse
 
 # Create your models here.
-
-
-# class User(models.Model):
-#     user_name = models.CharField(max_length=100)
-#     email = models.CharField(max_length=300, unique=True)
-#     password = models.CharField(max_length=300)
-#     is_admin = models.BooleanField(default=False)
-#
-#     def __repr__(self):
-#         return f'{self.user_name}'
 
 
 class Category(models.Model):
@@ -32,7 +23,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE) #TODO отвязка от категории при удалении
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True)
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
@@ -55,5 +46,5 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.id, self.slug])
 
-    def update_stock(self, product, count):
-        product.stock -= count
+    # def update_stock(self, product, count):
+    #     product.stock -= count

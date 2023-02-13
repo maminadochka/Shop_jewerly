@@ -4,6 +4,7 @@ from .forms import CartForm
 from .cart import Cart
 from main.models import Product
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
