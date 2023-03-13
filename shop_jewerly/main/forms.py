@@ -19,6 +19,10 @@ class LoginForm(Form):
 
 
 class UserForm(ModelForm):
+    username = CharField(label="Username")
+    email = CharField(label="Email", widget=EmailInput())
+    password = CharField(label="Password", widget=PasswordInput())
+
     class Meta:
         model = DjangoUser
         fields = ['username', 'email', 'password']
@@ -31,12 +35,4 @@ class UserForm(ModelForm):
         else:
             raise ValidationError("Don't understand You")
 
-
-# class ProfileForm(ModelForm):
-#     username = CharField(label="Username")
-#     email = CharField(label="Email", widget=EmailInput())
-#
-#     class Meta:
-#         model = DjangoUser
-#         fields = ['username', 'email']
 

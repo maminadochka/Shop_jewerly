@@ -16,13 +16,7 @@ def main_page(request):
 
 
 def logout_page(request):
-    # your_data = request.session.get(settings.CART_SESSION_ID, None)
-    # current_expiry = request.session.get('_sesion_expiry')
     logout(request)
-    # if your_data:
-    #     request.session[settings.CART_SESSION_ID] = your_data
-    #     if current_expiry:
-    #         request.session['_sesion_expiry'] = current_expiry
     return redirect('home')
 
 
@@ -74,6 +68,7 @@ def catalog_page(request, category_slug=None): #products list
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
+    # добавить фильтрацию на кол-во: если 0 -
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
